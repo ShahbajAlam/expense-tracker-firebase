@@ -1,19 +1,26 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import Login from "./components/Login";
 import Expenses from "./components/Expenses";
+import { useAuth } from "./contexts/AuthContext";
 
 function App() {
+    console.log(useAuth());
+    const { isAuth } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isAuth) navigate("expenses");
+        if (!isAuth) navigate("/");
+    }, [isAuth]);
+
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="expenses" element={<Expenses />} />
-            </Routes>
-        </BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="expenses" element={<Expenses />} />
+        </Routes>
     );
 }
 
 export default App;
-
-// bg-gradient-to-t from-[#237A57] to-[#093028]
