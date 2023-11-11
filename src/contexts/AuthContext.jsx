@@ -1,8 +1,8 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 const AuthContext = createContext(null);
 
-const init = {
+const initialState = JSON.parse(localStorage.getItem("auth")) || {
     isAuth: false,
     userName: "",
     photo: "",
@@ -20,15 +20,13 @@ const reducer = (state, action) => {
                 userID: action.payload.userID,
             };
         case "loggedout":
-            return init;
+            return initialState;
         default:
             return state;
     }
 };
 
 const AuthProvider = ({ children }) => {
-    const initialState = JSON.parse(localStorage.getItem("auth")) || init;
-
     const [{ isAuth, userName, photo, userID }, dispatch] = useReducer(
         reducer,
         initialState

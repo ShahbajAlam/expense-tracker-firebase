@@ -6,7 +6,6 @@ import Expenses from "./components/Expenses";
 import { useAuth } from "./contexts/AuthContext";
 
 function App() {
-    console.log(useAuth());
     const { isAuth } = useAuth();
     const navigate = useNavigate();
 
@@ -16,10 +15,12 @@ function App() {
     }, [isAuth]);
 
     return (
-        <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="expenses" element={<Expenses />} />
-        </Routes>
+        <div className="min-h-screen bg-gradient-to-tr from-[#136a8a] to-[#00bf8f] flex justify-center items-center">
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="expenses" element={<Expenses />} />
+            </Routes>
+        </div>
     );
 }
 
