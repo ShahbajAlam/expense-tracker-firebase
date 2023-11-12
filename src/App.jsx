@@ -9,7 +9,6 @@ import { useAuth } from "./contexts/AuthContext";
 function App() {
     const { isAuth } = useAuth();
     const navigate = useNavigate();
-    console.log(useAuth());
 
     useEffect(() => {
         if (isAuth) navigate("/expenses");

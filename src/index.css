@@ -11,6 +11,44 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.appContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr 2fr min-content;
+    grid-template-areas:
+        "userinfo"
+        "chart"
+        "lists"
+        "addexpense";
+    @media (min-width: 992px) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: min-content 1fr;
+        grid-template-areas:
+            "userinfo addexpense"
+            "chart lists";
+    }
+}
+
+.userInfo {
+    grid-area: userinfo;
+}
+
+.chart {
+    grid-area: chart;
+}
+
+.lists {
+    grid-area: lists;
+}
+
+.addExpense {
+    grid-area: addexpense;
+}
+
+.month {
+    writing-mode: vertical-lr;
+}
+
 ::-webkit-scrollbar {
     display: none;
 }
