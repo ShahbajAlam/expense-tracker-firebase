@@ -14,35 +14,32 @@
 .appContainer {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: min-content 1fr 2fr min-content;
+    align-content: space-between;
     grid-template-areas:
         "userinfo"
         "chart"
-        "lists"
-        "addexpense";
+        "lists";
     @media (min-width: 992px) {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: min-content 1fr;
         grid-template-areas:
-            "userinfo addexpense"
+            "userinfo userinfo"
             "chart lists";
     }
 }
 
 .userInfo {
     grid-area: userinfo;
+    min-height: 7vh;
 }
 
 .chart {
     grid-area: chart;
+    height: 25vh;
 }
 
 .lists {
     grid-area: lists;
-}
-
-.addExpense {
-    grid-area: addexpense;
+    height: 55vh;
 }
 
 .month {
