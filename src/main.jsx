@@ -5,11 +5,14 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import { AuthProvider } from "./contexts/AuthContext.jsx";
+import { ExpenseProvider } from "./contexts/ExpenseContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthProvider>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <ExpenseProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ExpenseProvider>
     </AuthProvider>
 );

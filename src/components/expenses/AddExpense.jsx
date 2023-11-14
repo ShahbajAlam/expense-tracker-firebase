@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-import Backdrop from "../Backdrop";
-import Modal from "../Modal";
+import Backdrop from "../AddFormModal/Backdrop";
+import Modal from "../AddFormModal/Modal";
 
 function AddExpense() {
     const [showForm, setShowForm] = useState(false);
 
     return (
         <div className="basis-[15%] flex justify-end">
-            <div onClick={() => setShowForm((e) => !e)}>
+            <div onClick={() => setShowForm(true)}>
                 <img
                     src="add.png"
                     alt="add logo"

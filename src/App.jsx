@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
 import Login from "./components/login/LogIn";
@@ -17,6 +18,7 @@ function App() {
 
     return (
         <div className="min-h-screen bg-gradient-to-tr from-[#136a8a] to-[#00bf8f] flex justify-center items-center">
+            <Toaster />
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />

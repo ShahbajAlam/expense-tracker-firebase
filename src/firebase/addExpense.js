@@ -1,5 +1,7 @@
-import { collection, addDoc } from "firebase/firestore";
 import { auth, db } from "./firebase";
+import { collection, addDoc } from "firebase/firestore";
+
+import { errorToast } from "../components/toasts/errorToast";
 
 const addExpense = async (expenseObj) => {
     try {
@@ -10,7 +12,7 @@ const addExpense = async (expenseObj) => {
         });
         return res.id;
     } catch (err) {
-        console.error(err.message);
+        errorToast("Something went wrong, could not add the expense");
     }
 };
 
