@@ -17,10 +17,49 @@ const months = [
     "DEC",
 ];
 
+const initialState = {
+    jan: 0,
+    feb: 0,
+    mar: 0,
+    apr: 0,
+    may: 0,
+    jun: 0,
+    jul: 0,
+    aug: 0,
+    sep: 0,
+    oct: 0,
+    nov: 0,
+    dec: 0,
+};
+
 function Chart() {
     const { expenses } = useExpense();
+    const [yearForChart, setYearForChart] = useState("");
     const [years, setYears] = useState([]);
-    const [year, setYear] = useState("");
+    const [monthlyExpense, setMonthlyExpense] = useState(initialState);
+    const perMonthExpense = Object.values(monthlyExpense);
+    const highestExpense = Object.values(monthlyExpense).sort(
+        (a, b) => b - a
+    )[0];
+
+    const monthWiseExpense = (e) => {
+        setYearForChart(e.target.value);
+
+        const activeMonths = expenses
+            .filter((ex) => ex.date.split("-")[0] === e.target.value)
+            .map((el) => el.date.split("-")[1] - 1);
+
+        const activeAmounts = expenses
+            .filter((ex) => ex.date.split("-")[0] === e.target.value)
+            .map((el) => el.amount);
+
+        let obj = {};
+        activeMonths.forEach((mon, idx) => {
+            obj[months[mon].toLowerCase()] = activeAmounts[idx];
+        });
+
+        setMonthlyExpense({ ...initialState, ...obj });
+    };
 
     useEffect(() => {
         setYears([
@@ -33,17 +72,32 @@ function Chart() {
     }, [expenses]);
 
     useEffect(() => {
-        setYear(years[0]);
+        setYearForChart(years[0]);
+        const activeMonths = expenses
+            .filter((ex) => ex.date.split("-")[0] === years[0])
+            .map((el) => el.date.split("-")[1] - 1);
+
+        const activeAmounts = expenses
+            .filter((ex) => ex.date.split("-")[0] === years[0])
+            .map((el) => el.amount);
+
+        let obj = {};
+        activeMonths.forEach((mon, idx) => {
+            obj[months[mon].toLowerCase()] = activeAmounts[idx];
+        });
+
+        setMonthlyExpense({ ...initialState, ...obj });
     }, [years]);
 
     return (
         <div className="m-0">
             {years.length > 0 && (
-                <div className="flex justify-between items-center  px-2">
-                    <p className="text-center">Year : {year}</p>
+                <div className="flex justify-between items-center  px-2 text-black">
+                    <p className="text-center">Year : {yearForChart}</p>
                     <select
-                        value={year}
-                        onChange={(e) => setYear(e.target.value)}
+                        value={yearForChart}
+                        onChange={(e) => monthWiseExpense(e)}
+                        className="border-none outline-none rounded-md py-1 bg-transparent"
                     >
                         {years.map((year) => (
                             <option key={year} value={year}>
@@ -54,9 +108,15 @@ function Chart() {
                 </div>
             )}
 
-            <div className="chart flex justify-evenly items-center w-full py-3 bg-green-400 rounded-xl">
-                {months.map((month) => (
-                    <MonthBar key={month} month={month} height={21} />
+            <div className="chart flex justify-evenly items-center w-full py-3 bg-yellow-500 rounded-xl">
+                {months.map((month, i) => (
+                    <MonthBar
+                        key={month}
+                        month={month}
+                        height={
+                            (perMonthExpense[i] / highestExpense) * 100 || 0
+                        }
+                    />
                 ))}
             </div>
         </div>

@@ -9,7 +9,10 @@ function MonthBar({ month, height }) {
     return (
         <div className="flex flex-col items-center justify-between w-4 h-full">
             <div className="w-full basis-[75%] bg-gradient-to-t from-[#3c1053] to-[#ad5389] rounded-full flex items-end">
-                <div ref={monthRef} className="w-full rounded-full bg-white" />
+                <div
+                    ref={monthRef}
+                    className="overflow-hidden w-full rounded-full bg-gradient-to-t from-[#FF5F6D] to-[#FFC371] duration-1000"
+                />
             </div>
             <p className="month basis-[25%] text-center">{month}</p>
         </div>

@@ -43,7 +43,9 @@ function Lists() {
 
         if (searchBy === "type") {
             const data = expenses.filter((expense) =>
-                expense.type.toLowerCase().includes(e.target.value)
+                expense.type
+                    .toLowerCase()
+                    .includes(e.target.value.toLowerCase())
             );
             setFilteredExpenses([...data]);
         }
@@ -77,7 +79,7 @@ function Lists() {
     };
 
     return (
-        <div className="lists p-3 bg-blue-500 rounded-xl">
+        <div className="lists p-3 bg-gradient-to-tr from-[#ff9966] to-[#ff5e62] rounded-xl">
             <div className="flex justify-between items-center h-[10%]">
                 <img
                     src="sort.png"
@@ -106,10 +108,36 @@ function Lists() {
                 </select>
             </div>
 
-            <ul className="overflow-auto py-2 h-[90%] rounded-lg">
-                {isDocsLoading && <h1>Loading...</h1>}
+            <ul className="overflow-auto py-2 h-[90%] rounded-lg relative">
+                {isDocsLoading && (
+                    <img
+                        src="loading.svg"
+                        alt="loading animation"
+                        width={100}
+                        height={100}
+                        className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+                    />
+                )}
                 {!isDocsLoading && filteredExpenses.length === 0 && (
-                    <h1>No record found...</h1>
+                    <div className="absolute top-[50%] left-[50%] translate-x-[-50%] w-full p-6 translate-y-[-50%] flex flex-col justify-center items-center">
+                        <img
+                            src="notfound.png"
+                            alt="not found"
+                            width={50}
+                            height={50}
+                        />
+                        <h1 className="text-xl mt-6 text-center">
+                            No expense found, add new by clicking the{" "}
+                            <img
+                                src="add.png"
+                                alt="add button"
+                                width={30}
+                                height={30}
+                                className="inline"
+                            />{" "}
+                            icon
+                        </h1>
+                    </div>
                 )}
                 {filteredExpenses.length > 0 &&
                     filteredExpenses.map((expense) => (
