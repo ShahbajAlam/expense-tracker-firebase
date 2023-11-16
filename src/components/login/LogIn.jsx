@@ -33,6 +33,11 @@ function Login() {
     const logInWithPassword = async (e) => {
         e.preventDefault();
 
+        if (!email || !password) {
+            errorToast("Please enter both email and password");
+            return;
+        }
+
         try {
             setIsLoggingInWithPassword(true);
             const res = await signInWithEmailAndPassword(auth, email, password);
@@ -83,7 +88,7 @@ function Login() {
                 },
             });
             localStorage.setItem("auth", JSON.stringify(authInfo));
-            navigate("expenses");
+            navigate("/expenses");
         } catch (err) {
             errorToast(err.message);
         } finally {
@@ -92,7 +97,7 @@ function Login() {
     };
 
     return (
-        <div className="w-[90%] px-6 py-8 rounded-xl bg-gradient-to-tr from-[#c2e59c] to-[#64b3f4] flex flex-col justify-center items-center">
+        <div className="w-[90%] px-6 py-4 rounded-xl bg-gradient-to-l from-[#325c69] to-[#2C5364] flex flex-col justify-center items-center text-gray-100 md:w-[65%] lg:w-[40%]">
             <Toaster />
             <form
                 className="w-full flex flex-col justify-center items-start"
@@ -102,6 +107,7 @@ function Login() {
                     email={email}
                     setEmail={setEmail}
                     isLoggingInWithPassword={isLoggingInWithPassword}
+                    isLoggingInWithGoogle={isLoggingInWithGoogle}
                 />
 
                 <PasswordInput
@@ -109,16 +115,20 @@ function Login() {
                     setHidden={setHidden}
                     password={password}
                     setPassword={setPassword}
+                    isLoggingInWithGoogle={isLoggingInWithGoogle}
                     isLoggingInWithPassword={isLoggingInWithPassword}
                 />
 
                 <LogInButton
+                    isLoggingInWithGoogle={isLoggingInWithGoogle}
                     isLoggingInWithPassword={isLoggingInWithPassword}
                 />
             </form>
 
             <div className="w-full h-1 bg-gray-400 flex justify-center items-center my-9 rounded-md">
-                <p className="text-lg bg-gray-100 px-2 rounded-lg">OR</p>
+                <p className="text-sm bg-gray-400 px-2 py-1 rounded-lg text-gray-950 md:text-[1.3rem]">
+                    OR
+                </p>
             </div>
 
             <SignInWithGoogleButton
@@ -127,9 +137,9 @@ function Login() {
             />
 
             <div className="mt-4">
-                <p className="text-[1.1rem]">
+                <p className="text-[1.1rem] md:text-[1.3rem]">
                     New user?{" "}
-                    <Link to="/signup" className="text-purple-950">
+                    <Link to="/signup" className="text-purple-300">
                         Register here
                     </Link>
                 </p>

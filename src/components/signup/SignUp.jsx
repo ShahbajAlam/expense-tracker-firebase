@@ -27,6 +27,11 @@ function SignUp() {
     const signUpWithPassword = async (e) => {
         e.preventDefault();
 
+        if (!email || !password) {
+            errorToast("Please enter both email and password");
+            return;
+        }
+
         try {
             setIsSigningUpWithPassword(true);
             const res = await createUserWithEmailAndPassword(
@@ -61,7 +66,7 @@ function SignUp() {
     };
 
     return (
-        <div className="w-[90%] px-6 py-8 rounded-xl bg-gradient-to-tr from-[rgb(194,229,156)] to-[#64b3f4] flex flex-col justify-center items-center">
+        <div className="w-[90%] px-6 py-8 rounded-xl bg-gradient-to-l from-[#325c69] to-[#2C5364] flex flex-col justify-center items-center text-gray-100 md:w-[65%] lg:w-[40%]">
             <Toaster />
             <form
                 className="w-full flex flex-col justify-center items-start"
@@ -85,9 +90,11 @@ function SignUp() {
             </form>
 
             <div className="mt-4">
-                <p className="text-[1.1rem]">
-                    Already an user?{" "}
-                    <Link to="/" className="text-purple-950">
+                <p className="text-[1.1rem] md:text-[1.3rem]">
+                    Already an user?
+                </p>
+                <p className="text-[1.1rem] md:text-[1.3rem]">
+                    <Link to="/" className="text-purple-300">
                         Go to login page
                     </Link>
                 </p>

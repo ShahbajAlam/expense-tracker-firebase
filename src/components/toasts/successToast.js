@@ -7,7 +7,7 @@ function successToast(message) {
         position: "top-center",
         style: {
             padding: 8,
-            paddingInline: 24,
+            paddingInline: 16,
             borderRadius: 36,
             textAlign: "center",
             wordWrap: "break-word",

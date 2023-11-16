@@ -22,19 +22,25 @@ function UserInfoModal({ setShowUserInfo }) {
         <Backdrop>
             <div
                 ref={modalRef}
-                className="w-full relative z-10 px-4 py-6 rounded-xl flex flex-col justify-center items-center bg-gradient-to-tr from-[#c2e59c] to-[#64b3f4]"
+                className="w-full relative z-10 px-4 py-6 rounded-xl flex flex-col justify-center items-center text-gray-100 bg-gradient-to-l from-[#325c69] to-[#2C5364] md:w-[70%] md:p-6 lg:w-[40%]"
             >
                 <img
                     src={photo || "user.png"}
                     alt="user dp"
-                    className="w-[8rem] aspect-square rounded-full mb-4"
+                    className="w-[8rem] aspect-square rounded-full mb-4 md:w-[10rem]"
                 />
-                <h1 className="text-2xl text-center mb-4">
+                <h1 className="text-2xl text-center mb-4 md:text-3xl">
                     Hi, {userName.length > 20 ? "User" : userName}
                 </h1>
-                <p>You have total {expenses.length} expenses saved</p>
+                <p className="md:text-[1.3rem]">
+                    {expenses.length > 0
+                        ? expenses.length > 1
+                            ? `You have total ${expenses.length} expenses saved`
+                            : `You have total ${expenses.length} expense saved`
+                        : "You have not added any expense yet"}
+                </p>
                 <button
-                    className="w-full bg-[#2c5eaf] px-4 py-2 rounded-xl text-[1.3rem] text-gray-50 mt-4"
+                    className="w-full bg-gradient-to-tr from-[#11998e] to-[#38ef7d] px-4 py-2 rounded-xl text-[1.2rem] text-gray-950 mt-4 md:text-[1.3rem]"
                     onClick={handleLogout}
                 >
                     Log out

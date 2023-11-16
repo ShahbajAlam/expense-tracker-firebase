@@ -17,7 +17,7 @@ function App() {
     }, [isAuth]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-tr from-[#136a8a] to-[#00bf8f] flex justify-center items-center">
+        <div className="min-h-screen bg-[#28282B] flex justify-center items-center lg:px-8">
             <Toaster />
             <Routes>
                 <Route path="/" element={<Login />} />
@@ -29,3 +29,4 @@ function App() {
 }
 
 export default App;
+

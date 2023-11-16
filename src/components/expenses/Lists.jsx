@@ -79,12 +79,12 @@ function Lists() {
     };
 
     return (
-        <div className="lists p-3 bg-gradient-to-tr from-[#ff9966] to-[#ff5e62] rounded-xl">
+        <div className="lists p-3 bg-gradient-to-tr from-[#2c3e50] to-[#2980b9] rounded-xl md:w-[70%] md:mx-auto md:px-5 lg:w-full">
             <div className="flex justify-between items-center h-[10%]">
                 <img
                     src="sort.png"
                     alt="sort by price button"
-                    className="w-[2rem] aspect-square"
+                    className="w-[2rem] aspect-square md:w-[2.75rem]"
                     role="button"
                     onClick={sortByPrice}
                 />
@@ -94,13 +94,13 @@ function Lists() {
                     placeholder={`search by ${searchBy}...`}
                     value={searchTerm}
                     onChange={handleSearch}
-                    className="border-none outline-none rounded-md py-1 px-2"
+                    className="border-none outline-none rounded-md py-1 px-2 w-[55%] md:text-lg md:py-2"
                 />
 
                 <select
                     value={searchBy}
                     onChange={(e) => setSearchBy(e.target.value)}
-                    className="border-none outline-none rounded-md py-1"
+                    className="border-none outline-none rounded-md py-1 w-[25%] md:py-2 md:text-lg cursor-pointer"
                 >
                     <option value="type">Type</option>
                     <option value="year">Year</option>
@@ -119,20 +119,20 @@ function Lists() {
                     />
                 )}
                 {!isDocsLoading && filteredExpenses.length === 0 && (
-                    <div className="absolute top-[50%] left-[50%] translate-x-[-50%] w-full p-6 translate-y-[-50%] flex flex-col justify-center items-center">
+                    <div className="absolute top-[50%] left-[50%] translate-x-[-50%] w-full p-6 translate-y-[-50%] flex flex-col justify-center items-center text-gray-100">
                         <img
                             src="notfound.png"
                             alt="not found"
                             width={50}
                             height={50}
                         />
-                        <h1 className="text-xl mt-6 text-center">
+                        <h1 className="text-lg mt-6 text-center md:text-xl md:px-6">
                             No expense found, add new by clicking the{" "}
                             <img
                                 src="add.png"
                                 alt="add button"
-                                width={30}
-                                height={30}
+                                width={25}
+                                height={25}
                                 className="inline"
                             />{" "}
                             icon

@@ -20,10 +20,12 @@
         "chart"
         "lists";
     @media (min-width: 992px) {
-        grid-template-columns: repeat(2, 1fr);
+        column-gap: 1.75rem;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: min-content 1fr;
         grid-template-areas:
-            "userinfo userinfo"
-            "chart lists";
+            "userinfo lists lists"
+            "chart lists lists";
     }
 }
 
@@ -35,11 +37,18 @@
 .chart {
     grid-area: chart;
     height: 25vh;
+    @media (min-width: 992px) {
+        height: 60vh;
+    }
 }
 
 .lists {
     grid-area: lists;
     height: 55vh;
+    @media (min-width: 992px) {
+        height: calc(100vh - 32px);
+        justify-self: flex-end;
+    }
 }
 
 .month {

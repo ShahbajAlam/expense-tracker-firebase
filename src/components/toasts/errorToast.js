@@ -5,6 +5,12 @@ function errorToast(errorMessage) {
         errorMessage = "Invalid login credentials";
     if (errorMessage.includes("email-already-in-use"))
         errorMessage = "You are already registered, try to login";
+    if (errorMessage.includes("too-many-requests"))
+        errorMessage = "Temporarily disabled due to multiple failed attempts";
+    if (errorMessage.includes("popup-closed-by-user"))
+        errorMessage = "Oops !! You closed the popup";
+    if (errorMessage.includes("weak-password"))
+        errorMessage = "Password should be atleast 6 characters long";
 
     toast.error(errorMessage, {
         duration: 2500,
@@ -12,7 +18,7 @@ function errorToast(errorMessage) {
         position: "top-center",
         style: {
             padding: 8,
-            paddingInline: 24,
+            paddingInline: 16,
             borderRadius: 36,
             textAlign: "center",
             wordWrap: "break-word",

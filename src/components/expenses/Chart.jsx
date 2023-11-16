@@ -90,14 +90,14 @@ function Chart() {
     }, [years]);
 
     return (
-        <div className="m-0">
+        <div className="m-0 flex flex-col justify-end text-gray-100 md:w-[70%] md:mx-auto lg:w-full">
             {years.length > 0 && (
-                <div className="flex justify-between items-center  px-2 text-black">
+                <div className="flex justify-between items-center  px-2 md:text-xl">
                     <p className="text-center">Year : {yearForChart}</p>
                     <select
                         value={yearForChart}
                         onChange={(e) => monthWiseExpense(e)}
-                        className="border-none outline-none rounded-md py-1 bg-transparent"
+                        className="border-none outline-none rounded-md py-1 bg-[#28282B] cursor-pointer"
                     >
                         {years.map((year) => (
                             <option key={year} value={year}>
@@ -108,7 +108,7 @@ function Chart() {
                 </div>
             )}
 
-            <div className="chart flex justify-evenly items-center w-full py-3 bg-yellow-500 rounded-xl">
+            <div className="chart flex justify-evenly items-center w-full py-2 bg-gradient-to-tr from-[#136a8a] to-[#267871] rounded-xl md:py-3">
                 {months.map((month, i) => (
                     <MonthBar
                         key={month}
