@@ -73,6 +73,7 @@ function Chart() {
 
     useEffect(() => {
         setYearForChart(years[0]);
+        
         const activeMonths = expenses
             .filter((ex) => ex.date.split("-")[0] === years[0])
             .map((el) => el.date.split("-")[1] - 1);
