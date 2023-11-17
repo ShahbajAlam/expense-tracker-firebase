@@ -9,7 +9,7 @@ import Item from "./Item";
 
 function Lists() {
     const { userID } = useAuth();
-    const { expenses, setExpenses } = useExpense();
+    const { expenses, setExpenses } = useExpense([]);
     const [isDocsLoading, setIsDocsLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
     const [sort, setSort] = useState("asc");
@@ -57,7 +57,6 @@ function Lists() {
             setFilteredExpenses([...data]);
         }
         if (searchBy === "amount") {
-            console.log("hi");
             const data = expenses.filter((expense) =>
                 String(expense.amount).includes(e.target.value)
             );
