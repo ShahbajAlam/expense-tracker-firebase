@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -97,7 +98,12 @@ function Login() {
     };
 
     return (
-        <div className="w-[90%] px-6 py-4 rounded-xl bg-gradient-to-l from-[#325c69] to-[#2C5364] flex flex-col justify-center items-center text-gray-100 md:w-[65%] lg:w-[40%]">
+        <motion.div
+            className="w-[90%] px-6 py-4 rounded-xl bg-gradient-to-l from-[#325c69] to-[#2C5364] flex flex-col justify-center items-center text-gray-100 md:w-[65%] lg:w-[40%]"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+        >
             <Toaster />
             <form
                 className="w-full flex flex-col justify-center items-start"
@@ -144,7 +150,7 @@ function Login() {
                     </Link>
                 </p>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

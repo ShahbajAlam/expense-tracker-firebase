@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import { useClickOutside } from "@react-hookz/web/esm/useClickOutside";
 
@@ -41,9 +42,12 @@ function Modal({ setShowForm }) {
     };
 
     return (
-        <div
+        <motion.div
             ref={modalRef}
             className="w-full relative z-10 px-4 py-6 rounded-xl flex justify-center items-center bg-gradient-to-l from-[#325c69] to-[#2C5364] md:w-[70%] md:p-6 lg:w-[40%]"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
         >
             <Toaster />
             <form onSubmit={handleAddExpense} className="w-full flex flex-col">
@@ -96,7 +100,7 @@ function Modal({ setShowForm }) {
                     Add Expense
                 </button>
             </form>
-        </div>
+        </motion.div>
     );
 }
 

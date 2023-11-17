@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useExpense } from "../../contexts/ExpenseContext";
 import MonthBar from "./MonthBar";
@@ -73,7 +74,7 @@ function Chart() {
 
     useEffect(() => {
         setYearForChart(years[0]);
-        
+
         const activeMonths = expenses
             .filter((ex) => ex.date.split("-")[0] === years[0])
             .map((el) => el.date.split("-")[1] - 1);
@@ -91,7 +92,12 @@ function Chart() {
     }, [years]);
 
     return (
-        <div className="m-0 flex flex-col justify-end text-gray-100 md:w-[70%] md:mx-auto lg:w-full">
+        <motion.div
+            className="m-0 flex flex-col justify-end text-gray-100 md:w-[70%] md:mx-auto lg:w-full"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut", delay: 0.3 }}
+        >
             {years.length > 0 && (
                 <div className="flex justify-between items-center  px-2 md:text-xl">
                     <p className="text-center">Year : {yearForChart}</p>
@@ -120,7 +126,7 @@ function Chart() {
                     />
                 ))}
             </div>
-        </div>
+        </motion.div>
     );
 }
 

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useClickOutside } from "@react-hookz/web/esm/useClickOutside";
 
@@ -20,9 +21,12 @@ function UserInfoModal({ setShowUserInfo }) {
 
     return (
         <Backdrop>
-            <div
+            <motion.div
                 ref={modalRef}
                 className="w-full relative z-10 px-4 py-6 rounded-xl flex flex-col justify-center items-center text-gray-100 bg-gradient-to-l from-[#325c69] to-[#2C5364] md:w-[70%] md:p-6 lg:w-[40%]"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
             >
                 <img
                     src={photo || "user.png"}
@@ -32,7 +36,10 @@ function UserInfoModal({ setShowUserInfo }) {
                 <h1 className="text-2xl text-center mb-4 md:text-3xl">
                     Hi, {userName.length > 20 ? "User" : userName}
                 </h1>
-                <p className="md:text-[1.3rem]">
+                <p
+                    style={{ textWrap: "balance" }}
+                    className="text-center md:text-[1.3rem]"
+                >
                     {expenses.length > 0
                         ? expenses.length > 1
                             ? `You have total ${expenses.length} expenses saved`
@@ -45,7 +52,7 @@ function UserInfoModal({ setShowUserInfo }) {
                 >
                     Log out
                 </button>
-            </div>
+            </motion.div>
         </Backdrop>
     );
 }

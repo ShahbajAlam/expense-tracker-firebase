@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 
@@ -79,7 +80,12 @@ function Lists() {
     };
 
     return (
-        <div className="lists p-3 bg-gradient-to-tr from-[#2c3e50] to-[#2980b9] rounded-xl md:w-[70%] md:mx-auto md:px-5 lg:w-full">
+        <motion.div
+            className="lists p-3 bg-gradient-to-tr from-[#2c3e50] to-[#2980b9] rounded-xl md:w-[70%] md:mx-auto md:px-5 lg:w-full"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut", delay: 0.6 }}
+        >
             <div className="flex justify-between items-center h-[10%]">
                 <img
                     src="sort.png"
@@ -150,7 +156,7 @@ function Lists() {
                         />
                     ))}
             </ul>
-        </div>
+        </motion.div>
     );
 }
 
