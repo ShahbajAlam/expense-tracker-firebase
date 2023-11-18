@@ -10,8 +10,9 @@ import { addExpense } from "../../firebase/addExpense";
 function Modal({ setShowForm }) {
     const modalRef = useRef(null);
     const [type, setType] = useState("");
-    const [amount, setAmount] = useState("");
     const [date, setDate] = useState("");
+    const [amount, setAmount] = useState("");
+    const [disabled, setDisabled] = useState(false);
     useClickOutside(modalRef, () => setShowForm(false));
 
     const reset = () => {
@@ -34,6 +35,7 @@ function Modal({ setShowForm }) {
         }
 
         const docID = await addExpense({ type, amount, date });
+        setDisabled(true);
         if (docID) {
             reset();
             successToast("The expense is added successfully");
@@ -95,6 +97,7 @@ function Modal({ setShowForm }) {
 
                 <button
                     type="submit"
+                    disabled={disabled}
                     className="w-full bg-gradient-to-tr from-[#11998e] to-[#38ef7d] px-4 py-2 rounded-xl text-[1.3rem] text-gray-950 mt-2 md:text-[1.3rem] md:mt-4"
                 >
                     Add Expense
