@@ -12,7 +12,6 @@ function Modal({ setShowForm }) {
     const [type, setType] = useState("");
     const [date, setDate] = useState("");
     const [amount, setAmount] = useState("");
-    const [disabled, setDisabled] = useState(false);
     useClickOutside(modalRef, () => setShowForm(false));
 
     const reset = () => {
@@ -21,9 +20,7 @@ function Modal({ setShowForm }) {
         setDate("");
     };
 
-    const handleAddExpense = async (e) => {
-        e.preventDefault();
-
+    const handleAddExpense = async () => {
         if (!type || !amount || !date) {
             errorToast("Enter values for all the fields");
             return;
@@ -34,12 +31,12 @@ function Modal({ setShowForm }) {
             return;
         }
 
+        setShowForm(false);
+
         const docID = await addExpense({ type, amount, date });
-        setDisabled(true);
         if (docID) {
             reset();
             successToast("The expense is added successfully");
-            setShowForm(false);
         }
     };
 
@@ -52,7 +49,7 @@ function Modal({ setShowForm }) {
             transition={{ duration: 0.4, ease: "easeOut" }}
         >
             <Toaster />
-            <form onSubmit={handleAddExpense} className="w-full flex flex-col">
+            <div className="w-full flex flex-col">
                 <label
                     htmlFor="title"
                     className="text-[1.2rem] mb-1 md:text-[1.3rem]"
@@ -96,13 +93,12 @@ function Modal({ setShowForm }) {
                 />
 
                 <button
-                    type="submit"
-                    disabled={disabled}
+                    onClick={handleAddExpense}
                     className="w-full bg-gradient-to-tr from-[#11998e] to-[#38ef7d] px-4 py-2 rounded-xl text-[1.3rem] text-gray-950 mt-2 md:text-[1.3rem] md:mt-4"
                 >
                     Add Expense
                 </button>
-            </form>
+            </div>
         </motion.div>
     );
 }
